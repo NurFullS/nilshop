@@ -31,9 +31,22 @@ const Main = () => {
 
     if (errorMessage) return <div className="text-red-500 text-center mt-4">{errorMessage}</div>
 
+    const handleAddBusket = (product: Product) => {
+        const storedCart = localStorage.getItem('cart')
+        const cart: (Product & { quantity: number })[] = storedCart ? JSON.parse(storedCart) : []
+
+        const existing = cart.find(item => item.id === product.id)
+        if (existing) {
+            existing.quantity += 1
+        } else {
+            cart.push({ ...product, quantity: 1 })
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart))
+    }
+
     return (
         <div className="p-6">
-            <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Товары</h1>
             <div className="flex gap-20">
                 {products.map(product => (
                     <div key={product.id} className="bg-white shadow-md rounded-2xl max-w-80 overflow-hidden flex flex-col hover:shadow-lg transition-shadow duration-300">
@@ -54,7 +67,7 @@ const Main = () => {
                             <p className={`text-sm mt-1 font-medium ${product.availabilityStatus === 'В наличии' ? 'text-green-600' : 'text-red-500'}`}>
                                 {product.availabilityStatus}
                             </p>
-                            <button className='bg-green-600 rounded-2xl h-10 text-white cursor-pointer mt-3'>В корзину</button>
+                            <button onClick={() => handleAddBusket(product)} className='bg-green-600 rounded-2xl h-10 text-white cursor-pointer mt-3'>В корзину</button>
                         </div>
                     </div>
                 ))}
