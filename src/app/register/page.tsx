@@ -54,6 +54,7 @@ const RegisterPage = () => {
                         id="email"
                         type="email"
                         placeholder="Email"
+                        maxLength={30}
                         {...register('email', { required: 'Email обязателен' })}
                         className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-200"
                     />
@@ -63,6 +64,7 @@ const RegisterPage = () => {
                         id="password"
                         type="password"
                         placeholder="Пароль"
+                        maxLength={20}
                         {...register('password', { required: 'Пароль обязателен' })}
                         className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300 transition duration-200"
                     />

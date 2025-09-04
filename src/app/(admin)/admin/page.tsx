@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import Users from '../admin/users';
 
 export default function AdminDashboard() {
     const router = useRouter();
@@ -28,8 +27,7 @@ export default function AdminDashboard() {
 
     return (
         <div>
-            <h1 className="text-3xl font-bold mb-6">Админ Панель</h1>
-            <Users />
+            
         </div>
     )
 }
