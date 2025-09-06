@@ -4,9 +4,11 @@ import React, { useEffect, useState } from 'react'
 import { ShoppingCart } from '@mui/icons-material'
 import axios from 'axios'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 type User = {
     username: string
+    role: string
 }
 
 type Product = {
@@ -24,6 +26,8 @@ const Header = () => {
     const [user, setUser] = useState<User | null>(null)
     const [cart, setCart] = useState<Product[]>([])
     const [isCartOpen, setIsCartOpen] = useState(false)
+    const [isOpenProfile, setIsOpenProfile] = useState(false)
+    const router = useRouter()
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -65,6 +69,24 @@ const Header = () => {
     const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0)
 
+    const handleNavAdmin = () => {
+        if (user && user.role === 'ADMIN') {
+            router.push('/admin/products');
+        } else {
+            setIsOpenProfile(!isOpenProfile);
+        }
+    }
+
+    const handleLogout = async () => {
+        try {
+            await axios.post('http://localhost:8080/auth/logout', {}, { withCredentials: true })
+            setUser(null)
+            router.push('/login')
+        } catch (error) {
+            console.error('Ошибка при выходе из системы', error)
+        }
+    }
+
     return (
         <header>
             <div className="bg-gray-800 flex rounded-b-3xl p-4 items-center shadow-md">
@@ -75,7 +97,7 @@ const Header = () => {
                     <Link href="/about" className="text-white hover:text-blue-600">О нас</Link>
                 </div>
                 <div className="flex items-center gap-4 mr-10 relative">
-                    <span className="font-semibold text-white">{user ? user.username : 'Логин'}</span>
+                    <span onClick={handleNavAdmin} className="font-semibold cursor-pointer text-white font-mono text-[20px]">{user ? user.username : 'Логин'}</span>
                     <div className="relative">
                         <ShoppingCart
                             sx={{ width: '50px', height: '30px', cursor: 'pointer', color: 'white' }}
@@ -126,6 +148,9 @@ const Header = () => {
                         </div>
                     )}
                 </div>
+                {isOpenProfile && <div className='absolute top-16 right-20 bg-white p-4 rounded shadow-md flex flex-col gap-2'>
+                    <button onClick={handleLogout}>Выйти</button>
+                </div>} 
             </div>
         </header>
     )

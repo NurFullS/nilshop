@@ -42,9 +42,9 @@ export default function Users() {
   };
 
   return (
-    <div className="p-6 flex flex-col gap-4">
+    <div className="p-6 flex gap-4">
       {users.map((user) => (
-        <div key={user.id} className="p-4 border rounded-lg flex justify-between items-center shadow-sm bg-white w-full max-w-md">
+        <div key={user.id} className="p-4 border rounded-lg flex justify-between items-center shadow-sm bg-white w-100 max-w-md">
           <div>
             <h2 className="font-semibold">Имя: {user.username}</h2>
             <p className="text-sm text-gray-600">Email: {user.email}</p>

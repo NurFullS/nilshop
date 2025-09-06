@@ -15,6 +15,7 @@ export default function AdminDashboard() {
                     router.replace('/');
                 } else {
                     setLoading(false);
+                    router.replace('/admin/products');
                 }
             } catch (err) {
                 router.replace('/');

@@ -107,7 +107,7 @@ const ProductCard = ({ product, onDelete, onUpdate }: ProductCardProps) => {
         <img 
           src={product.imageUrl} 
           alt={product.name} 
-          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          className="w-full h-64 object-contain transition-transform duration-300 hover:scale-105"
         />
       </div>
       <div className="p-4 flex-1 flex flex-col justify-between">

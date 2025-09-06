@@ -47,21 +47,27 @@ const AddProductPage = () => {
       <h2 className="text-2xl font-semibold mb-6">Добавить товар</h2>
 
       <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-        <input {...register('name', { required: true })} placeholder="Название" />
-        <input {...register('description', { required: true })} placeholder="Описание" />
-        <input type="number" {...register('price', { required: true })} placeholder="Цена" />
-        <input {...register('category', { required: true })} placeholder="Категория" />
-        <select {...register('availabilityStatus', { required: true })}>
+        <input {...register('name', { required: true })} placeholder="Название" className='border-gray-700 border h-10 p-2 outline-none' />
+        <textarea {...register('description', { required: true })} placeholder="Описание" className='border-gray-700 border p-2 outline-none' />
+        <input type="number" {...register('price', { required: true })} placeholder="Цена" className='border-gray-700 border h-10 p-2 outline-none' />
+        <select {...register('category', { required: true })} className='outline-none'>
+          <option value="">Выберите категорию</option>
+          <option value="Одежда">Одежда</option>
+          <option value="Брюки">Брюки</option>
+          <option value="Кроссовки">Кроссовки</option>
+          <option value="Носки">Носки</option>
+        </select>
+        <select {...register('availabilityStatus', { required: true })} className='outline-none'>
           <option value="">Выберите статус</option>
           <option value="В наличии">В наличии</option>
           <option value="Нет в наличии">Нет в наличии</option>
         </select>
         <input type="file" {...register('file', { required: true })} />
-        <button type="submit">Добавить</button>
+        <button type="submit" className='bg-blue-600 w-80 h-10 ml-18 rounded-4xl text-white cursor-pointer'>Добавить</button>
       </form>
 
-      {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+      {successMessage && <p style={{ color: 'green' }} className='text-center mt-2'>{successMessage}</p>}
+      {errorMessage && <p style={{ color: 'red' }} className='text-center mt-2'>{errorMessage}</p>}
     </div>
   );
 };
