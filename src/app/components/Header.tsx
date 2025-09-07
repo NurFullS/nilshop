@@ -70,7 +70,9 @@ const Header = () => {
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0)
 
     const handleNavAdmin = () => {
-        if (user && user.role === 'ADMIN') {
+        if (!user) {
+            router.push('/login');
+        } else if (user.role === 'ADMIN') {
             router.push('/admin/products');
         } else {
             setIsOpenProfile(!isOpenProfile);
@@ -81,7 +83,6 @@ const Header = () => {
         try {
             await axios.post('http://localhost:8080/auth/logout', {}, { withCredentials: true })
             setUser(null)
-            router.push('/login')
         } catch (error) {
             console.error('Ошибка при выходе из системы', error)
         }
@@ -89,13 +90,8 @@ const Header = () => {
 
     return (
         <header>
-            <div className="bg-gray-800 flex rounded-b-3xl p-4 items-center shadow-md">
+            <div className="bg-gray-800 flex rounded-b-3xl p-4 items-center shadow-md justify-between">
                 <Link href="/"><h1 className="text-3xl font-bold text-white ml-10">NilShop</h1></Link>
-                <div className="flex-grow flex justify-center items-center gap-10">
-                    <Link href="/" className="text-white hover:text-blue-600">Главная</Link>
-                    <Link href="/contacts" className="text-white hover:text-blue-600">Контакты</Link>
-                    <Link href="/about" className="text-white hover:text-blue-600">О нас</Link>
-                </div>
                 <div className="flex items-center gap-4 mr-10 relative">
                     <span onClick={handleNavAdmin} className="font-semibold cursor-pointer text-white font-mono text-[20px]">{user ? user.username : 'Логин'}</span>
                     <div className="relative">
@@ -150,7 +146,7 @@ const Header = () => {
                 </div>
                 {isOpenProfile && <div className='absolute top-16 right-20 bg-white p-4 rounded shadow-md flex flex-col gap-2'>
                     <button onClick={handleLogout}>Выйти</button>
-                </div>} 
+                </div>}
             </div>
         </header>
     )

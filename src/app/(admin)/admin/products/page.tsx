@@ -102,7 +102,7 @@ const ProductCard = ({ product, onDelete, onUpdate }: ProductCardProps) => {
   }
 
   return (
-    <div className="bg-white shadow-md rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col">
+    <div className="bg-white shadow-md rounded-2xl w-auto overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col">
       <div className="w-full h-56 overflow-hidden">
         <img 
           src={product.imageUrl} 
@@ -127,7 +127,7 @@ const ProductCard = ({ product, onDelete, onUpdate }: ProductCardProps) => {
           <div>
             <h2 className="text-lg font-semibold text-gray-800">{product.name}</h2>
             <p className="text-gray-600 text-sm mt-1 line-clamp-2">{product.description}</p>
-            <p className="text-blue-600 font-bold text-lg mt-2">{product.price} ₽</p>
+            <p className="text-blue-600 font-bold text-lg mt-2">{product.price} KGS</p>
             <p className="text-sm text-gray-500 mt-1">Категория: {product.category}</p>
             <p className={`text-sm mt-1 font-medium ${product.availabilityStatus === 'В наличии' ? 'text-green-600' : 'text-red-500'}`}>
               {product.availabilityStatus}

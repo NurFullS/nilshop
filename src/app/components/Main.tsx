@@ -86,7 +86,7 @@ const Main = () => {
                                 </p>
                                 <button
                                     onClick={(e) => handleAddBasket(e, product)}
-                                    className="bg-gray-900 text-[18px] text-white h-10 hover:bg-gray-800 cursor-pointer mt-3"
+                                    className={`text-[18px] ${product.availabilityStatus === "Нет в наличии" ? 'hidden' : 'bg-gray-900'} text-white h-10 hover:bg-gray-800 cursor-pointer mt-3`}
                                 >
                                     Купить
                                 </button>
@@ -112,7 +112,7 @@ const Main = () => {
                         <div className='flex gap-4 justify-between'>
                             <button
                                 onClick={(e) => handleAddBasket(e, selectedProduct)}
-                                className="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg cursor-pointer"
+                                className={`mt-4 px-4 py-2 ${selectedProduct.availabilityStatus === "Нет в наличии" ? 'hidden' : 'bg-green-600'} text-white rounded-lg cursor-pointer`}
                             >
                                 В корзину
                             </button>

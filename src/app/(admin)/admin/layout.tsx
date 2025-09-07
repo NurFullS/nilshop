@@ -14,9 +14,8 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
 
 
   const menu = [
-    { name: 'Добавить товар', path: '/admin/addproduct' },
     { name: 'Товары', path: '/admin/products' },
-    { name: 'Аналитика', path: '/admin/analytics' },
+    { name: 'Добавить товар', path: '/admin/addproduct' },
     { name: 'Пользователи', path: '/admin/users' },
   ];
 
@@ -25,7 +24,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     <Header />
       <div className="flex">
         <aside className="w-60 h-100 bg-gray-800 rounded-br-2xl rounded-tr-2xl mt-30 text-white flex flex-col">
-          <Link href="/admin"><h2 className="text-2xl font-bold p-6 border-b border-gray-700">Админ панель</h2></Link>
+          <Link href="/admin/products"><h2 className="text-2xl font-bold p-6 border-b border-gray-700">Админ панель</h2></Link>
           <nav className="flex flex-col p-4 gap-2">
             {menu.map((item) => (
               <Link
